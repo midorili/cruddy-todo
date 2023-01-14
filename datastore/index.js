@@ -55,7 +55,6 @@ exports.readOne = (id, callback) => {
 };
 
 exports.update = (id, text, callback) => {
-
   var fileDirectory = exports.dataDir + '/' + id + '.txt';
   fs.readFile(fileDirectory, (err, fileData) => {
     if (err) {
@@ -73,14 +72,14 @@ exports.update = (id, text, callback) => {
 };
 
 exports.delete = (id, callback) => {
-  var item = items[id];
-  delete items[id];
-  if (!item) {
-    // report an error if item not found
-    callback(new Error(`No item with id: ${id}`));
-  } else {
-    callback();
-  }
+  var fileDirectory = exports.dataDir + '/' + id + '.txt';
+  fs.unlink(fileDirectory, (err, fileData) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, fileData);
+    }
+  });
 };
 
 // Config+Initialization code -- DO NOT MODIFY /////////////////////////////////
