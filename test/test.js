@@ -120,13 +120,15 @@ describe('todos', () => {
       const todo1text = 'todo 1';
       const todo2text = 'todo 2';
       const todo3text = 'todo 3';
-      const expectedTodoList = [{ id: 0, text: '00001.txt' }, { id: 1, text: '00002.txt' }, { id: 2, text: '00003.txt' }];
+      const expectedTodoList = [{ id: '00001', text: 'todo 1' }, { id: '00002', text: 'todo 2' }, { id: '00003', text: 'todo 3' }];
       todos.create(todo1text, (err, todo) => {
         todos.create(todo2text, (err, todo) => {
           todos.create(todo3text, (err, todo) => {
             todos.readAll((err, todoList) => {
+              console.log('expected', todoList);
+              console.log('test', expectedTodoList)
               expect(todoList).to.have.lengthOf(3);
-              expect(todoList).to.deep.include.members(expectedTodoList, 'NOTE: Text field should use the Id initially');
+              expect(todoList).to.deep.include.members(expectedTodoList);
               done();
             });
           });
