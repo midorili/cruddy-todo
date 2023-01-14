@@ -35,6 +35,7 @@ exports.readAll = (callback) => {
       callback(null, data);
     }
   });
+  //complete BMR
 };
 
 exports.readOne = (id, callback) => {
